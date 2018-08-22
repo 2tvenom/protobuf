@@ -1971,6 +1971,10 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 }
 
 func (g *Generator) RecordTypeUse(t string) {
+	if g.usedPackages == nil {
+		g.usedPackages = map[GoImportPath]bool{}
+	}
+
 	if _, ok := g.typeNameToObject[t]; ok {
 		// Call ObjectNamed to get the true object to record the use.
 		obj := g.ObjectNamed(t)
